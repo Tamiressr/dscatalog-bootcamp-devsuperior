@@ -22,8 +22,16 @@ public class CategoryService {
 		List<Category>list=repository.findAll();
 		return  list.stream().map(c->new CategoryDTO(c)).toList();//função map transforma um elemento original em outra coisa
 	}
+    @Transactional(readOnly=false)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> objDTO= repository.findById(id);
 		return new CategoryDTO(objDTO.orElseThrow(()->new ObjectNotFoundException("Categoria não encontrada")));
+	}
+	@Transactional
+	public CategoryDTO insert(CategoryDTO dto) {
+		 Category entity=new Category();
+		 entity.setName(dto.getName());
+		 entity=repository.save(entity);
+		 return new CategoryDTO(entity);
 	}
 }
