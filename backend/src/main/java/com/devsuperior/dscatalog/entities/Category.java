@@ -28,11 +28,11 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public Long getD() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setD(Long d) {
+	public void setId(Long d) {
 		this.id = d;
 	}
 
