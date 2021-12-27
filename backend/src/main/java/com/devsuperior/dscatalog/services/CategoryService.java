@@ -1,6 +1,5 @@
 package com.devsuperior.dscatalog.services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 import com.devsuperior.dscatalog.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -56,7 +56,7 @@ public class CategoryService {
 			throw new ObjectNotFoundException("Id not found "+id);
 		}
 		catch (DataIntegrityViolationException e) {
-			// TODO: handle exception
+			throw new DatabaseException("Não é possível deletar Categorias com produtos associados");
 		}
 	}
 }
